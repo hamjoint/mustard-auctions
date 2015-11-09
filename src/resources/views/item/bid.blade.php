@@ -36,17 +36,17 @@
                                 @endif
                                 <ul class="pricing-table">
                                     @if ($bids->count())
-                                        <li class="price">Current bid: {{ p($item->biddingPrice) }}</li>
+                                        <li class="price">Current bid: {{ mustard_price($item->biddingPrice) }}</li>
                                         @if ($highest_bid->bidder == Auth::user())
-                                            <li class="bullet-item"><strong>Your maximum bid:</strong> {{ p($highest_bid->amount) }}</li>
+                                            <li class="bullet-item"><strong>Your maximum bid:</strong> {{ mustard_price($highest_bid->amount) }}</li>
                                         @endif
                                         @if ($item->hasReserve() && !$item->isReserved())
-                                            <li class="bullet-item"><strong>Reserve price:</strong> {{ p($item->reservePrice) }}</li>
+                                            <li class="bullet-item"><strong>Reserve price:</strong> {{ mustard_price($item->reservePrice) }}</li>
                                         @endif
                                     @else
-                                        <li class="price">Starting price: {{ p($item->startPrice) }}</li>
+                                        <li class="price">Starting price: {{ mustard_price($item->startPrice) }}</li>
                                     @endif
-                                    <li class="bullet-item"><strong>Time left:</strong> {{ t($item->getTimeLeft()) }}</li>
+                                    <li class="bullet-item"><strong>Time left:</strong> {{ mustard_time($item->getTimeLeft()) }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -59,13 +59,13 @@
                                 @else
                                     <h2>Your maximum bid</h2>
                                 @endif
-                                <label>Enter an amount of {{ p($minimum_bid) }} or more
+                                <label>Enter an amount of {{ mustard_price($minimum_bid) }} or more
                                     <div class="row collapse prefix-radius">
                                         <div class="small-1 columns">
                                             <span class="prefix">&pound;</span>
                                         </div>
                                         <div class="small-11 columns">
-                                            <input type="text" name="amount" value="{{ dec($minimum_bid) }}" required pattern="monetary" />
+                                            <input type="text" name="amount" value="{{ mustard_number($minimum_bid, 2, 'C') }}" required pattern="monetary" />
                                             <small class="error">Please enter a bid amount.</small>
                                         </div>
                                     </div>
@@ -94,21 +94,21 @@
                                 @foreach ($bids as $key => $bid)
                                 <tr>
                                     @if ($key === 0)
-                                    <td>{{ p($item->biddingPrice) }}</td>
+                                        <td>{{ mustard_price($item->biddingPrice) }}</td>
                                     @else
-                                    <td>{{ p($bid->amount) }}</td>
+                                        <td>{{ mustard_price($bid->amount) }}</td>
                                     @endif
-                                    <td>{{ dt($bid->placed) }}</td>
+                                        <td>{{ mustard_datetime($bid->placed) }}</td>
                                     @if ($bid->bidder == Auth::user() || $item->seller == Auth::user())
-                                    <td><a href="{{ $bid->bidder->url }}">{{ $bid->bidder->username }}</a></td>
+                                        <td><a href="{{ $bid->bidder->url }}">{{ $bid->bidder->username }}</a></td>
                                     @else
-                                    <td>Redacted</td>
+                                        <td>Redacted</td>
                                     @endif
                                 </tr>
                                 @endforeach
                                 <tr>
-                                    <td>{{ p($item->startPrice) }}</td>
-                                    <td>{{ dt($item->startDate) }}</td>
+                                    <td>{{ mustard_price($item->startPrice) }}</td>
+                                    <td>{{ mustard_datetime($item->startDate) }}</td>
                                     <td>Starting price</td>
                                 </tr>
                             </tbody>
