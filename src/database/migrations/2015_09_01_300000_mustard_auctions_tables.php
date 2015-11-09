@@ -19,6 +19,7 @@ along with Mustard.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
+use Hamjoint\Mustard\Auctions\BidIncrement;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -47,8 +48,28 @@ class MustardAuctionsTables extends Migration
         Schema::create('bid_increments', function(Blueprint $table)
         {
             $table->mediumInteger('bid_increment_id', true)->unsigned();
+            $table->decimal('minimum', 8, 2)->unsigned();
             $table->decimal('increment', 8, 2)->unsigned();
         });
+
+        $increments = [
+            0 => 0.01,
+            1 => 0.1,
+            10 => 1,
+            50 => 5,
+            100 => 10,
+            500 => 50,
+            1000 => 100
+        ];
+
+        foreach ($increments as $minimum => $increment) {
+            $bid_increment = new BidIncrement;
+
+            $bid_increment->minimum = $minimum;
+            $bid_increment->increment = $increment;
+
+            $bid_increment->save();
+        }
     }
 
     /**
