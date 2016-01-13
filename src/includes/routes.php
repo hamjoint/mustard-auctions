@@ -22,7 +22,7 @@ along with Mustard.  If not, see <http://www.gnu.org/licenses/>.
 Route::group([
     'prefix' => env('MUSTARD_BASE', ''),
     'namespace' => 'Hamjoint\Mustard\Auctions\Http\Controllers',
-    'middleware' => 'auth',
+    'middleware' => ['web', 'auth'],
 ], function()
 {
     Route::get('admin/bid-increments', ['uses' => 'AdminController@getBidIncrements']);
