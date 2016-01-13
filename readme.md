@@ -1,5 +1,12 @@
 ## Mustard Auctions module
 
+[![StyleCI](https://styleci.io/repos/45717903/shield?style=flat)](https://styleci.io/repos/45717903)
+[![Build Status](https://travis-ci.org/hamjoint/mustard-auctions.svg)](https://travis-ci.org/hamjoint/mustard-auctions)
+[![Total Downloads](https://poser.pugx.org/hamjoint/mustard-auctions/d/total.svg)](https://packagist.org/packages/hamjoint/mustard-auctions)
+[![Latest Stable Version](https://poser.pugx.org/hamjoint/mustard-auctions/v/stable.svg)](https://packagist.org/packages/hamjoint/mustard-auctions)
+[![Latest Unstable Version](https://poser.pugx.org/hamjoint/mustard-auctions/v/unstable.svg)](https://packagist.org/packages/hamjoint/mustard-auctions)
+[![License](https://poser.pugx.org/hamjoint/mustard-auctions/license.svg)](https://packagist.org/packages/hamjoint/mustard-auctions)
+
 Auctions support for [Mustard](http://withmustard.org/), the open source marketplace platform.
 
 ### Installation
