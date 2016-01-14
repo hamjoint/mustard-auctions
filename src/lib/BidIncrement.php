@@ -36,4 +36,22 @@ class BidIncrement extends \Hamjoint\Mustard\Model
      * @var string
      */
     protected $primaryKey = 'bid_increment_id';
+
+    /**
+     * Return the minimum next bid for an amount.
+     *
+     * @param float $amount
+     * @return float
+     */
+    public static function getMinimumNextBid($amount)
+    {
+        return $amount + self::where(
+            'minimum',
+            '<=',
+            $amount
+        )->orderBy(
+            'increment',
+            'desc'
+        )->take(1)->value('increment');
+    }
 }
