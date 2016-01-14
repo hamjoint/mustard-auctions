@@ -22,8 +22,8 @@ along with Mustard.  If not, see <http://www.gnu.org/licenses/>.
 namespace Hamjoint\Mustard\Auctions\Http\Controllers;
 
 use Hamjoint\Mustard\Auctions\BidIncrement;
-use Hamjoint\Mustard\Http\Controllers\Controller;
 use Hamjoint\Mustard\Auctions\Tables\AdminBidIncrements;
+use Hamjoint\Mustard\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -37,7 +37,7 @@ class AdminController extends Controller
         $table = new AdminBidIncrements(BidIncrement::query());
 
         return view('mustard::admin.bid-increments', [
-            'table' => $table,
+            'table'          => $table,
             'bid_increments' => $table->paginate(),
         ]);
     }

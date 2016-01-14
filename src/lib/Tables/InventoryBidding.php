@@ -33,13 +33,13 @@ class InventoryBidding extends Table
      * @var array
      */
     public $columnHeaders = [
-        'Item ID' => 'item_id',
-        'Name' => 'name',
+        'Item ID'   => 'item_id',
+        'Name'      => 'name',
         'Your bids' => 'bids',
-        'Max bid' => 'max_bid',
-        'Details' => null,
+        'Max bid'   => 'max_bid',
+        'Details'   => null,
         'Time left' => 'end_date',
-        'Options' => null,
+        'Options'   => null,
     ];
 
     /**
@@ -99,6 +99,7 @@ class InventoryBidding extends Table
      * Sort items by purchase date.
      *
      * @param string $sortOrder
+     *
      * @return void
      */
     public function sortDate($sortOrder)
