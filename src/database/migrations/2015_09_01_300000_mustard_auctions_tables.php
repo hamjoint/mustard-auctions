@@ -20,8 +20,8 @@ along with Mustard.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 use Hamjoint\Mustard\Auctions\BidIncrement;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class MustardAuctionsTables extends Migration
 {
@@ -32,8 +32,7 @@ class MustardAuctionsTables extends Migration
      */
     public function up()
     {
-        Schema::create('bids', function(Blueprint $table)
-        {
+        Schema::create('bids', function (Blueprint $table) {
             $table->integer('bid_id', true)->unsigned();
             $table->integer('item_id')->unsigned();
             $table->integer('user_id')->unsigned();
@@ -45,25 +44,24 @@ class MustardAuctionsTables extends Migration
             $table->unique(['item_id', 'user_id', 'amount']);
         });
 
-        Schema::create('bid_increments', function(Blueprint $table)
-        {
+        Schema::create('bid_increments', function (Blueprint $table) {
             $table->mediumInteger('bid_increment_id', true)->unsigned();
             $table->decimal('minimum', 8, 2)->unsigned();
             $table->decimal('increment', 8, 2)->unsigned();
         });
 
         $increments = [
-            0 => 0.01,
-            1 => 0.1,
-            10 => 1,
-            50 => 5,
-            100 => 10,
-            500 => 50,
-            1000 => 100
+            0    => 0.01,
+            1    => 0.1,
+            10   => 1,
+            50   => 5,
+            100  => 10,
+            500  => 50,
+            1000 => 100,
         ];
 
         foreach ($increments as $minimum => $increment) {
-            $bid_increment = new BidIncrement;
+            $bid_increment = new BidIncrement();
 
             $bid_increment->minimum = $minimum;
             $bid_increment->increment = $increment;

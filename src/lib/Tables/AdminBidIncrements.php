@@ -33,7 +33,7 @@ class AdminBidIncrements extends Table
      */
     public $columnHeaders = [
         'Bid Increment ID' => 'bid_increment_id',
-        'Increment' => 'increment',
+        'Increment'        => 'increment',
     ];
 
     /**

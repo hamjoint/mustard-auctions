@@ -34,6 +34,7 @@ class ItemController extends Controller
      * Return the item bid view.
      *
      * @param int $itemId
+     *
      * @return \Illuminate\View\View
      */
     public function getBid($itemId)
@@ -42,13 +43,13 @@ class ItemController extends Controller
 
         if (!$item->auction) {
             return redirect($item->url)->withErrors([
-                'This item is not an auction, so cannot be bid on.'
+                'This item is not an auction, so cannot be bid on.',
             ]);
         }
 
         $bids = $item->getBidHistory();
 
-        $highest_bid = $bids->first() ?: new Bid;
+        $highest_bid = $bids->first() ?: new Bid();
 
         if ($bids->isEmpty()) {
             $minimum_bid = $item->startPrice;
@@ -59,8 +60,8 @@ class ItemController extends Controller
         }
 
         return view('mustard::item.bid', [
-            'item' => $item,
-            'bids' => $bids,
+            'item'        => $item,
+            'bids'        => $bids,
             'highest_bid' => $highest_bid,
             'minimum_bid' => $minimum_bid,
         ]);
@@ -70,6 +71,7 @@ class ItemController extends Controller
      * Place a bid.
      *
      * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postBid(Request $request)
@@ -78,19 +80,19 @@ class ItemController extends Controller
 
         if ($item->seller->userId == Auth::user()->userId) {
             return redirect()->back()->withErrors([
-                'You cannot bid on your own items.'
+                'You cannot bid on your own items.',
             ]);
         }
 
         if (time() < $item->startDate) {
             return redirect()->back()->withErrors([
-                'This item is not yet open for bidding.'
+                'This item is not yet open for bidding.',
             ]);
         }
 
         if (time() > $item->endDate) {
             return redirect()->back()->withErrors([
-                'This item has ended and cannot be bid on.'
+                'This item has ended and cannot be bid on.',
             ]);
         }
 
@@ -104,13 +106,13 @@ class ItemController extends Controller
         if ($highest_bid && $highest_bid->bidder == Auth::user()) {
             if ($request->input('amount') < BidIncrement::getMinimumNextBid($highest_bid->amount)) {
                 return redirect()->back()->withErrors([
-                    'amount' => 'Your new maximum bid does not meet the minimum amount.'
+                    'amount' => 'Your new maximum bid does not meet the minimum amount.',
                 ]);
             }
         // Not highest bidder, so bid must be higher than minimum amount for current bidding price
         } elseif ($request->input('amount') < $minimum_bid) {
             return redirect()->back()->withErrors([
-                'amount' => 'Your bid does not meet the minimum amount.'
+                'amount' => 'Your bid does not meet the minimum amount.',
             ]);
         }
 
@@ -156,8 +158,8 @@ class ItemController extends Controller
                     "You've been outbid",
                     'emails.item.outbid',
                     [
-                        'item_id' => $item->itemId,
-                        'item_name' => $item->name,
+                        'item_id'    => $item->itemId,
+                        'item_name'  => $item->name,
                         'item_price' => $item->biddingPrice,
                     ]
                 );
@@ -180,6 +182,7 @@ class ItemController extends Controller
      * Watch an item.
      *
      * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public static function endedAuctionsAdmin()
@@ -199,8 +202,8 @@ class ItemController extends Controller
                 'You won an item',
                 'emails.item.won',
                 [
-                    'item_id' => $item->itemId,
-                    'item_name' => $item->name,
+                    'item_id'    => $item->itemId,
+                    'item_name'  => $item->name,
                     'item_price' => $item->biddingPrice,
                     'bid_amount' => $item->winningBid->amount,
                     'bid_placed' => $item->winningBid->placed,

@@ -60,9 +60,10 @@ class Bid extends \Hamjoint\Mustard\Model
     /**
      * Return the total number of bids.
      *
-     * @param integer $since UNIX timestamp to optionally specify a lower selection boundary.
-     * @param integer $until UNIX timestamp to optionally specify an upper selection boundary.
-     * @return integer
+     * @param int $since UNIX timestamp to optionally specify a lower selection boundary.
+     * @param int $until UNIX timestamp to optionally specify an upper selection boundary.
+     *
+     * @return int
      */
     public static function totalPlaced($since = 0, $until = null)
     {
@@ -76,9 +77,10 @@ class Bid extends \Hamjoint\Mustard\Model
     /**
      * Return the average amount of bids.
      *
-     * @param integer $since UNIX timestamp to optionally specify a lower selection boundary.
-     * @param integer $until UNIX timestamp to optionally specify an upper selection boundary.
-     * @return integer
+     * @param int $since UNIX timestamp to optionally specify a lower selection boundary.
+     * @param int $until UNIX timestamp to optionally specify an upper selection boundary.
+     *
+     * @return int
      */
     public static function averageAmount($since = 0, $until = null)
     {

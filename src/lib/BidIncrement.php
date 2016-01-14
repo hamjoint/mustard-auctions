@@ -41,6 +41,7 @@ class BidIncrement extends \Hamjoint\Mustard\Model
      * Return the minimum next bid for an amount.
      *
      * @param float $amount
+     *
      * @return float
      */
     public static function getMinimumNextBid($amount)
